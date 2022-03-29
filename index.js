@@ -43,7 +43,7 @@ app.post("/api/students", (req, res) => {
 });
 
 app.delete("/api/students/:id", (req, res) => {
-	const student = students.find((stu) => stu.id === parseInts(req.params.id));
+	const student = students.find((stu) => stu.id === parseInt(req.params.id));
 	if (!student) return res.status(404).send("Estudiante no encontrado");
 
 	const index = students.indexOf(student);
