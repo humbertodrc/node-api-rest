@@ -20,10 +20,14 @@ app.get("/api/students", (req, res) => {
 	res.send(students);
 });
 
-app.get("/api/students:id", (req, res) => {
-	const student = students.filter((stu) => stu.id === parseInt(req.params.id));
-	if (!student) return res.status(404).send("Estudiante no encontrado");
-	else res.send(student);
+app.get("/api/students/:id", (req, res) => {
+	const student = students.find((c) => c.id === parseInt(req.params.id));
+	console.log(student);
+	if (!student) {
+		return res.status(404).send("Estudiante no encontrado");
+	} else {
+		res.send(student);
+	}
 });
 
 app.post("/api/students", (req, res) => {
@@ -39,11 +43,11 @@ app.post("/api/students", (req, res) => {
 });
 
 app.delete("/api/students/:id", (req, res) => {
-  const student = students.filter((stu) => stu.id === parseInts(req.params.id));
-  if (!student) return res.status(404).send("Estudiante no encontrado");
+	const student = students.find((stu) => stu.id === parseInts(req.params.id));
+	if (!student) return res.status(404).send("Estudiante no encontrado");
 
-  const index = students.indexOf(student);
-  students.splice(index, 1);
+	const index = students.indexOf(student);
+	students.splice(index, 1);
 });
 
 const port = process.env.PORT || 80;
